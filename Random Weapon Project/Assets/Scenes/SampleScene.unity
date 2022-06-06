@@ -774,6 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mouseSensitivity: 0.8
   _playerBody: {fileID: 1812591785}
+  _headGroup: {fileID: 330585543}
   _clampValues: {x: -75, y: 75}
 --- !u!1 &372374245
 GameObject:

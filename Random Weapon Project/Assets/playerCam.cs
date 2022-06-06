@@ -10,6 +10,7 @@ public class playerCam : MonoBehaviour
     Vector2 _look;
 
     public Transform _playerBody;
+    public GameObject _headGroup;
     [Header("x = min/up, y = max/down")]
     public Vector2 _clampValues = new Vector2(80f, 80f);
 
