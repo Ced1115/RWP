@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Zooming",
+                    "type": "Button",
+                    "id": "05a31ee7-04ff-4a3b-83d7-5e0d9497a9fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "0d3d6a1d-58ef-4956-969d-1c7ba3c28813",
@@ -247,6 +256,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouching",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9af527ca-9ac2-4b2c-a628-1707eaf18ecc",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Zooming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1172444-63a2-4652-b07b-03822e5ef4da",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Zooming",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

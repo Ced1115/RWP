@@ -37,6 +37,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Zooming"",
+                    ""type"": ""Button"",
+                    ""id"": ""05a31ee7-04ff-4a3b-83d7-5e0d9497a9fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""0d3d6a1d-58ef-4956-969d-1c7ba3c28813"",
@@ -271,6 +280,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Crouching"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9af527ca-9ac2-4b2c-a628-1707eaf18ecc"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Zooming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1172444-63a2-4652-b07b-03822e5ef4da"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Zooming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -308,6 +339,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Look = m_Movement.FindAction("Look", throwIfNotFound: true);
+        m_Movement_Zooming = m_Movement.FindAction("Zooming", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
@@ -372,6 +404,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Movement;
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Look;
+    private readonly InputAction m_Movement_Zooming;
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Jump;
     private readonly InputAction m_Movement_Sprint;
@@ -381,6 +414,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public MovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Look => m_Wrapper.m_Movement_Look;
+        public InputAction @Zooming => m_Wrapper.m_Movement_Zooming;
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
         public InputAction @Sprint => m_Wrapper.m_Movement_Sprint;
@@ -397,6 +431,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Look.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLook;
+                @Zooming.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnZooming;
+                @Zooming.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnZooming;
+                @Zooming.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnZooming;
                 @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
@@ -416,6 +453,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Zooming.started += instance.OnZooming;
+                @Zooming.performed += instance.OnZooming;
+                @Zooming.canceled += instance.OnZooming;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -453,6 +493,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IMovementActions
     {
         void OnLook(InputAction.CallbackContext context);
+        void OnZooming(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
